@@ -1,12 +1,17 @@
 package com.jonathanracioppi.jonathanracioppicom.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Resume {
 
     @Id
@@ -26,6 +31,9 @@ public class Resume {
 
     @OneToMany
     private List<ResumeSection> resumeSection;
+
+    @Column
+    private boolean display = true;
 
 
 }
