@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Entity(name = "RESUME_SECTIONS")
 @Getter
 @Setter
 public abstract class ResumeSection {
@@ -18,10 +18,10 @@ public abstract class ResumeSection {
     private Long rsId;
 
     @Column
-    private String name;
+    private String nameSection;
 
     @Column
-    private String description;
+    private String descriptionSection;
 
     @ManyToOne
     private Resume resume;

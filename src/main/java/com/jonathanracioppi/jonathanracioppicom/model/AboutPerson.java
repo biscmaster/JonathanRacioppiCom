@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-public class About extends ResumeSection{
+public class AboutPerson extends ResumeSection{
 
 
 

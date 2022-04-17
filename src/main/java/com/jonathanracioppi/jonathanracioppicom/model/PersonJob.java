@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Job extends ResumeSection{
+public class PersonJob extends ResumeSection{
 
     @Column
     private Date fromDate;

@@ -1,7 +1,6 @@
 package com.jonathanracioppi.jonathanracioppicom.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,27 +8,30 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-@Entity
+@Entity(name = "RESUMES")
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Resume {
 
     @Id
     private long resumeId;
 
     @Column
-    private String name;
+    private String namePerson;
 
     @Column
-    private String email;
+    private String emailPerson;
 
     @Column
-    private String phone;
+    private String phoneNumber;
 
     @Column
-    private String about;
+    private String aboutPerson;
 
-    @OneToMany
+    @OneToMany()
     private List<ResumeSection> resumeSection;
 
     @Column
