@@ -21,7 +21,7 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public Resume getResumeByName(String name) throws ResourceNotFoundException {
 
-        Optional<Resume> resume = resumeRepo.findResumeByNamePerson(name);
+        Optional<Resume> resume = resumeRepo.findResumeByNamePersonWhereDisplayIsTrue(name);
 
         if(resume.isPresent()){
             return resume.get();
@@ -33,26 +33,27 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public List<Resume> getAllResumes() {
-        return resumeRepo.findAll().stream().filter(x -> x.isDisplay()).collect(Collectors.toList());
+        return resumeRepo.findAll().stream().filter(Resume::isDisplay).collect(Collectors.toList());
     }
 
     @Transactional
     @Override
     public void updateResume(Resume resume) {
-        Resume res = resumeRepo.getById(resume.getResumeId());
 
-        if(res != null){
-            res.setDisplay(resume.isDisplay());
-            res.setResumeSection(resume.getResumeSection());
-            res.setAboutPerson(resume.getAboutPerson());
-            res.setEmailPerson(resume.getEmailPerson());
-            res.setNamePerson(resume.getNamePerson());
-            res.setPhoneNumber(resume.getPhoneNumber());
-            resumeRepo.save(res);
-        }else{
-            resumeRepo.save(resume);
+        if(resume != null) {
+            if (resume.getResumeId() != 0) {
+                Resume res = resumeRepo.getById(resume.getResumeId());
+                res.setDisplay(resume.isDisplay());
+                res.setResumeSection(resume.getResumeSection());
+                res.setAboutPerson(resume.getAboutPerson());
+                res.setEmailPerson(resume.getEmailPerson());
+                res.setNamePerson(resume.getNamePerson());
+                res.setPhoneNumber(resume.getPhoneNumber());
+                resumeRepo.save(res);
+            } else {
+                resumeRepo.save(resume);
+            }
+            resumeRepo.flush();
         }
-        resumeRepo.flush();
-
     }
 }

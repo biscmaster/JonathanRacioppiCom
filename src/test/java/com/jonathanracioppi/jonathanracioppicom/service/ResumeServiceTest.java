@@ -32,7 +32,7 @@ public class ResumeServiceTest {
     @Test
     public void testResumeServiceReturnsResumeWithDisplayTrue() throws ResourceNotFoundException {
         Optional<Resume> repoRet = Optional.of(Resume.builder().display(true).build());
-        when(resumeRepo.findResumeByNamePerson(any())).thenReturn(repoRet);
+        when(resumeRepo.findResumeByNamePersonWhereDisplayIsTrue(any())).thenReturn(repoRet);
 
         Resume res  = resumeService.getResumeByName("Test");
 
@@ -41,22 +41,5 @@ public class ResumeServiceTest {
 
     }
 
-    @Test
-    public void testResumeServiceThrowsException() {
-        Optional<Resume> repoRet = Optional.of(Resume.builder().display(false).build());
-        when(resumeRepo.findResumeByNamePerson(any())).thenReturn(repoRet);
-
-        try{
-            Resume res  = resumeService.getResumeByName("Test");
-            fail("Expected ResourceNotFoundException");
-
-        }catch(ResourceNotFoundException rnfe){
-            assertEquals( "Resource is either marked not to display or is not present",rnfe.getMessage());
-        }
-
-
-
-
-    }
 
 }

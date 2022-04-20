@@ -9,8 +9,6 @@ import java.util.Optional;
 public interface ResumeRepo extends JpaRepository<Resume, Long> {
 
     @Query("SELECT r FROM RESUMES r where r.namePerson = :namePerson AND r.display = true")
-    Optional<Resume> findResumeByNamePerson(String namePerson);
+    Optional<Resume> findResumeByNamePersonWhereDisplayIsTrue(String namePerson);
 
-    @Query("select r from RESUMES r where upper(r.namePerson) = upper(?1)")
-    Optional<Resume> findByNamePersonEqualsIgnoreCase(String namePerson);
 }

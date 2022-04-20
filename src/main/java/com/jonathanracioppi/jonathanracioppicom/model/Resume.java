@@ -2,10 +2,7 @@ package com.jonathanracioppi.jonathanracioppicom.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "RESUMES")
@@ -17,6 +14,7 @@ import java.util.List;
 public class Resume {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long resumeId;
 
     @Column
@@ -31,7 +29,7 @@ public class Resume {
     @Column
     private String aboutPerson;
 
-    @OneToMany()
+    @OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ResumeSection> resumeSection;
 
     @Column
